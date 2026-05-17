@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../contexts/application';
 import { useSwipeable } from 'react-swipeable';
 
@@ -24,6 +24,9 @@ export default function Home() {
 	const [meta, setMeta] = useState();
 	const [playlist, setPlaylist] = useState(false);
 	const [filter, setFilter] = useState('');
+	const [subFolder, setSubFolder] = useState(false);
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!artists) {
@@ -51,6 +54,15 @@ export default function Home() {
 		}
 	// eslint-disable-next-line
 	}, [params]);
+
+	useEffect(() => {
+		// selected folder only contains more folders
+		if (list && !list.albums.length && !list.files.length && list.folders.length) {
+			setSubFolder(list.path);
+			setArtistGroups(alphaGroup(list.folders));
+			sideToggle(true);
+		}
+	}, [list]);
 
 	const reset = () => {
 		setLoaded(false);
@@ -196,6 +208,12 @@ export default function Home() {
 		return false;
 	}
 
+	const resetArtists = () => {
+		setArtistGroups(alphaGroup(artists));
+		setSubFolder(false);
+		navigate('/');
+	}
+
 	return (
 		<div id="page-home">
 			<div id="music-browser" {...swipeHandlers} className={appState.playerState === 'open' ? 'is-fixed' : ''}>
@@ -203,9 +221,19 @@ export default function Home() {
 					{ artistGroups &&
 						<Fragment>
 							<div id="artist-filter">
-								<input type="text" id="field-filter" value={filter} maxLength="30" onChange={doFilter} placeholder="Find in Artists" />
-								{ filter &&	<button type="button" className="btn-clear" onClick={clearFilter}>Clear</button> }
+								{ subFolder ? (
+										<div className="btn-return" onClick={resetArtists}>Return to main</div>
+
+									) : (
+
+										<>
+											<input type="text" id="field-filter" value={filter} maxLength="30" onChange={doFilter} placeholder="Find in Artists" />
+											{ filter &&	<button type="button" className="btn-clear" onClick={clearFilter}>Clear</button> }
+										</>
+									)
+								}
 							</div>
+
 							<div id="artist-list">
 								{
 									artistGroups.map((group) => {
@@ -215,7 +243,8 @@ export default function Home() {
 												<ul>
 													{
 														group.items.map((item, index) => {
-															return <li key={item+index} {...isCurrent(item)}><Link to={`/${item}`}>{item}</Link></li>
+															const link = subFolder ? `/${subFolder}/${item}` : `/${item}`;
+															return <li key={item+index} {...isCurrent(item)}><Link to={link}>{item}</Link></li>
 														})
 													}
 												</ul>
