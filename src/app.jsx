@@ -8,7 +8,7 @@ import { ApplicationProvider } from './contexts/application';
 import Passcode from './components/passcode';
 import Header from './components/header';
 import Home from './views/home';
-import './styles/main.scss';
+import './assets/styles/main.scss';
 
 export default function App() {
 	const [authenticated, setAuthenticated] = useState(false);

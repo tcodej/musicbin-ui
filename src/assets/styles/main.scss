@@ -212,7 +212,7 @@ strong {
   background-position: left center;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url('../assets/img/logo.png');
+  background-image: url('../img/logo.png');
 
   &.home {
     @extend .no-text;
@@ -246,14 +246,14 @@ audio {
   padding: 0;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url('../assets/img/icon-clear.svg');
+  background-image: url('../img/icon-clear.svg');
 }
 
 .btn-return {
   background-size: 20px;
   background-position: center left;
   background-repeat: no-repeat;
-  background-image: url('../assets/img/icon-return.svg');
+  background-image: url('../img/icon-return.svg');
   padding-left: 30px;
   cursor: pointer;
 }
@@ -393,7 +393,7 @@ audio {
 
 #artist-album {
   max-width: 300px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -501,15 +501,15 @@ audio {
   }
 
   .btn-random-albums {
-    background-image: url('../assets/img/icon-random-albums.svg');
+    background-image: url('../img/icon-random-albums.svg');
   }
 
   .btn-random-tracks {
-    background-image: url('../assets/img/icon-random-tracks.svg');
+    background-image: url('../img/icon-random-tracks.svg');
   }
 
   .btn-clear-cache {
-    background-image: url('../assets/img/icon-refresh.svg');
+    background-image: url('../img/icon-refresh.svg');
   }
 }
 
@@ -571,19 +571,25 @@ audio {
 }
 
 #breadcrumbs {
+  position: sticky;
+  top: 50px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   font-size: 18px;
   font-weight: $reg;
+  z-index: 9;
+  background-color: $d-gray;
+  box-shadow: 0 10px 12px -6px $shadow;
 
   .back {
     cursor: pointer;
     background-size: 15px;
     background-position: -3px center;
     background-repeat: no-repeat;
-    background-image: url('../assets/img/icon-back.svg');
+    background-image: url('../img/icon-back.svg');
     padding-left: 20px;
     color: $blue;
     padding-right: 40px;
@@ -599,7 +605,7 @@ audio {
 .album-list {
   @extend .flex;
   // max-width: $bp-xlarge;
-  padding: 0 20px;
+  padding: 20px;
   // margin: 0 auto;
 }
 
@@ -741,11 +747,11 @@ audio {
       background-position: center;
 
       &.min {
-        background-image: url('../assets/img/icon-volmin.svg');
+        background-image: url('../img/icon-volmin.svg');
       }
 
       &.max {
-        background-image: url('../assets/img/icon-volmax.svg');
+        background-image: url('../img/icon-volmax.svg');
       }
     }
   }
@@ -765,33 +771,33 @@ audio {
     background-position: center;
 
     &.preload {
-      background-image: url('../assets/img/spinner.svg');
+      background-image: url('../img/spinner.svg');
       cursor: default;
     }
 
     &.playlist {
-      background-image: url('../assets/img/icon-playlist.svg');
+      background-image: url('../img/icon-playlist.svg');
     }
 
     &.minimize {
-      background-image: url('../assets/img/icon-minimize.svg');
+      background-image: url('../img/icon-minimize.svg');
     }
 
     &.prev {
-      background-image: url('../assets/img/control-prev-white.svg');
+      background-image: url('../img/control-prev-white.svg');
     }
 
     &.playpause {
-      background-image: url('../assets/img/control-play-white.svg');
+      background-image: url('../img/control-play-white.svg');
       background-size: 50px;
 
       &.is-playing {
-        background-image: url('../assets/img/control-pause-white.svg');
+        background-image: url('../img/control-pause-white.svg');
       }
     }
 
     &.next {
-      background-image: url('../assets/img/control-next-white.svg');
+      background-image: url('../img/control-next-white.svg');
     }
   }
 

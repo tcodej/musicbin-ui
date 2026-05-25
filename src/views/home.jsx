@@ -2,8 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../contexts/application';
 import { useSwipeable } from 'react-swipeable';
-
-import * as api /*{ browse, getRandomAlbums, getRandomTracks, clearCache }*/ from '../utils/api';
+import * as api from '../utils/api';
 import { alphaGroup } from '../utils';
 import Loading from '../components/loading';
 import Track from '../components/track';

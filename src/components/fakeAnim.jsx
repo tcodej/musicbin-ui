@@ -1,4 +1,4 @@
-import '../styles/fakeanim.scss';
+import '../assets/styles/fakeanim.scss';
 
 export default function FakeAnim({ freeze }) {
 	return (
