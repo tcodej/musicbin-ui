@@ -12,6 +12,7 @@ export default function MetaData({ data }) {
 		}
 	}, [data]);
 
+	// uncomment this to allow the thumbnail to update when a track changes
 	// useEffect(() => {
 	// 	if (appState.currentTrack) {
 	// 		setMeta(appState.currentTrack.meta);
