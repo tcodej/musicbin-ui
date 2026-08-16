@@ -348,7 +348,7 @@ export default function Home() {
 								<ul>
 									{ searchResults.result.map(item => {
 										return (
-											<li key={item} onClick={() => playPath(item)}>{item.replace('.mp3', '').replaceAll('/', ' → ')}</li>
+											<li key={item} onClick={() => playPath(item)}>{item.replace('.mp3', '').replaceAll('./', '').replaceAll('/', ' → ')}</li>
 										)
 									})}
 								</ul>
