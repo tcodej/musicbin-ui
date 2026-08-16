@@ -7,7 +7,7 @@ import {
 import { ApplicationProvider } from './contexts/application';
 import Passcode from './components/passcode';
 import Header from './components/header';
-import Home from './views/home';
+import Home from './pages/home';
 import './assets/styles/main.scss';
 
 export default function App() {

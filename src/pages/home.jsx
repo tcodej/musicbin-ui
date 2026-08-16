@@ -24,6 +24,7 @@ export default function Home() {
 	const [playlist, setPlaylist] = useState(false);
 	const [filter, setFilter] = useState('');
 	const [subFolder, setSubFolder] = useState(false);
+	const [searchResults, setSearchResults] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -67,6 +68,7 @@ export default function Home() {
 		setLoaded(false);
 		setMeta();
 		setList();
+		setSearchResults();
 		updateAppState({ currentArtist: '', error: false });
 	}
 
@@ -171,6 +173,20 @@ export default function Home() {
 		setArtistGroups(alphaGroup(results));
 	}
 
+	const doSearch = (e) => {
+		if (e.key === 'Enter') {
+			reset();
+			const query = e.currentTarget.value.trim();
+
+			if (query) {
+				api.search(query).then((response) => {
+					setSearchResults(response);
+					setLoaded(true)
+				});
+			}
+		}
+	}
+
 	const clearFilter = () => {
 		setFilter('');
 		setArtistGroups(alphaGroup(artists));
@@ -184,7 +200,6 @@ export default function Home() {
 				console.log(resp);
 			});
 	}
-
 
 	const swipeHandlers = useSwipeable({
 		delta: 100,
@@ -213,6 +228,14 @@ export default function Home() {
 		navigate('/');
 	}
 
+	// play a song found in search
+	const playPath = (path) => {
+		const pieces = path.split('/');
+		const file = pieces.pop();
+		setPlaylist({ path: pieces.join('/'), songs: [file], index: 0 });
+		updateAppState({ playerState: 'min', loaded: false });
+	}
+
 	return (
 		<div id="page-home">
 			<div id="music-browser" {...swipeHandlers} className={appState.playerState === 'open' ? 'is-fixed' : ''}>
@@ -226,7 +249,15 @@ export default function Home() {
 									) : (
 
 										<>
-											<input type="text" id="field-filter" value={filter} maxLength="30" onChange={doFilter} placeholder="Find in Artists" />
+											<input
+												type="text"
+												id="field-filter"
+												value={filter}
+												maxLength="30"
+												onChange={doFilter}
+												onKeyUp={doSearch}
+												placeholder="Find in Artists"
+											/>
 											{ filter &&	<button type="button" className="btn-clear" onClick={clearFilter}>Clear</button> }
 										</>
 									)
@@ -274,7 +305,7 @@ export default function Home() {
 						<MetaData data={meta} />
 					}
 
-					{ (loaded && !list) &&
+					{ (loaded && !list && !searchResults) &&
 						<div className="logo home">MusicBin</div>
 					}
 
@@ -308,6 +339,21 @@ export default function Home() {
 								return <li key={item+index} onClick={() => { loadPlaylist(index) }}><Track num={index+1} total={list.files.length} item={item} /></li>
 							})}
 						</ul>
+					}
+
+					{ searchResults &&
+						<div id="search-results">
+							<h3>{searchResults.message}</h3>
+							{(searchResults?.result?.length > 0) &&
+								<ul>
+									{ searchResults.result.map(item => {
+										return (
+											<li key={item} onClick={() => playPath(item)}>{item.replace('.mp3', '').replaceAll('/', ' → ')}</li>
+										)
+									})}
+								</ul>
+							}
+						</div>
 					}
 				</div>
 

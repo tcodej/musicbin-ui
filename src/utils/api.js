@@ -78,3 +78,7 @@ export const getRandomTracks = async (num) => {
 export const clearCache = async () => {
 	return getResult('/cache/clear');
 };
+
+export const search = async (query) => {
+	return getResult(`/search/${query}`);
+};

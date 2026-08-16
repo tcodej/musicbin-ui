@@ -896,3 +896,18 @@ audio {
   @extend .no-select;
   cursor: pointer;
 }
+
+#search-results {
+  text-align: left;
+  padding: 20px;
+
+  li {
+    padding: 2px 0;
+    cursor: pointer;
+
+    &:hover {
+      color: #000;
+      background-color: #ccc;
+    }
+  }
+}
