@@ -1,9 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import {
-	BrowserRouter,
-	Routes,
-	Route
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ApplicationProvider } from './contexts/application';
 import Passcode from './components/passcode';
 import Header from './components/header';
