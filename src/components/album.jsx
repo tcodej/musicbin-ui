@@ -1,4 +1,3 @@
-import { Fragment, useState, useEffect } from 'react';
 import Cover from './cover';
 
 export default function Album({ item, onClick, showArtist }) {

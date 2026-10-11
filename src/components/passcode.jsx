@@ -24,6 +24,7 @@ export default function Passcode({ onUnlock }) {
         window.removeEventListener('keyup', handleKeyUp);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleKeyUp = (e) => {

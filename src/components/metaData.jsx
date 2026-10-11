@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState } from 'react';
-import { useAppContext } from '../contexts/application';
+// import { useAppContext } from '../contexts/application';
 import Cover from './cover';
 
 export default function MetaData({ data }) {
-  const { appState } = useAppContext();
+  // const { appState } = useAppContext();
   const [ meta, setMeta ] = useState();
 
   useEffect(() => {

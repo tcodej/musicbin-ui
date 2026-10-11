@@ -280,12 +280,15 @@ export default function Player({ playlist, loadList }) {
   }, [playlist]);
 
   useEffect(() => {
+    // lint warning fix
+    const playerCurrent = player.current;
+
     if (song && song.mp3) {
-      player.current.addEventListener('play', handlePlay);
-      player.current.addEventListener('canplay', handleCanPlay);
-      player.current.addEventListener('durationchange', handleDurationChange);
-      player.current.addEventListener('timeupdate', handleTimeUpdate);
-      player.current.addEventListener('ended', handleEnded);
+      playerCurrent.addEventListener('play', handlePlay);
+      playerCurrent.addEventListener('canplay', handleCanPlay);
+      playerCurrent.addEventListener('durationchange', handleDurationChange);
+      playerCurrent.addEventListener('timeupdate', handleTimeUpdate);
+      playerCurrent.addEventListener('ended', handleEnded);
 
       if ('mediaSession' in navigator) {
         const metaData = {
@@ -315,12 +318,13 @@ export default function Player({ playlist, loadList }) {
     }
 
     return () => {
-      if (player && player.current) {
-        player.current.removeEventListener('play', handlePlay);
-        player.current.removeEventListener('canplay', handleCanPlay);
-        player.current.removeEventListener('durationchange', handleDurationChange);
-        player.current.removeEventListener('timeupdate', handleTimeUpdate);
-        player.current.removeEventListener('ended', handleEnded);
+      if (playerCurrent) {
+        console.log('cleanup');
+        playerCurrent.removeEventListener('play', handlePlay);
+        playerCurrent.removeEventListener('canplay', handleCanPlay);
+        playerCurrent.removeEventListener('durationchange', handleDurationChange);
+        playerCurrent.removeEventListener('timeupdate', handleTimeUpdate);
+        playerCurrent.removeEventListener('ended', handleEnded);
       }
     }
   // eslint-disable-next-line

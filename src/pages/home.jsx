@@ -52,7 +52,7 @@ export default function Home() {
       setLoaded(true);
       sideToggle(true);
     }
-  // eslint-disable-next-line
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   useEffect(() => {
@@ -62,6 +62,7 @@ export default function Home() {
       setArtistGroups(alphaGroup(list.folders));
       sideToggle(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
 
   const reset = () => {
