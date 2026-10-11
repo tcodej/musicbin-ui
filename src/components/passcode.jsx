@@ -9,6 +9,11 @@ export default function Passcode({ onUnlock }) {
   const isTouchDevice = navigator.maxTouchPoints > 0;
   const numbers = isTouchDevice ? ['1','2','3','4','5','6','7','8','9','0'] : ['7','8','9','4','5','6','1','2','3','0'];
 
+  const unlock = () => {
+    sessionStorage.setItem('authenticated', true);
+    setTimeout(onUnlock, 500);
+  }
+
   useEffect(() => {
     if (code == 'xxxx') {
       unlock();
@@ -60,11 +65,6 @@ export default function Passcode({ onUnlock }) {
       setEntered('');
       setFailed(false);
     }, 750);
-  }
-
-  const unlock = () => {
-    sessionStorage.setItem('authenticated', true);
-    setTimeout(onUnlock, 500);
   }
 
   const dot = () => {

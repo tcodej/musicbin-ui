@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ApplicationProvider } from './contexts/application';
 import Passcode from './components/passcode';
@@ -7,15 +7,7 @@ import Home from './pages/home';
 import './assets/styles/main.scss';
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    if (!authenticated) {
-      if (sessionStorage.getItem('authenticated')) {
-        setAuthenticated(true);
-      }
-    }
-  }, [authenticated]);
+  const [authenticated, setAuthenticated] = useState(sessionStorage.getItem('authenticated'));
 
   const unlock = () => {
     setAuthenticated(true);
@@ -25,7 +17,7 @@ export default function App() {
     <ApplicationProvider>
       <BrowserRouter basename="/">
       { authenticated ?
-        <Fragment>
+        <>
           <Header />
           <div id="container">
             <Routes>
@@ -33,7 +25,7 @@ export default function App() {
               <Route path="/*" element={<Home />} />
             </Routes>
           </div>
-        </Fragment>
+        </>
       :
         <Passcode onUnlock={unlock} />
       }
