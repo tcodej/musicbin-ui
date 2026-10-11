@@ -7,37 +7,37 @@ import Home from './pages/home';
 import './assets/styles/main.scss';
 
 export default function App() {
-	const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
 
-	useEffect(() => {
-		if (!authenticated) {
-			if (sessionStorage.getItem('authenticated')) {
-				setAuthenticated(true);
-			}
-		}
-	}, [authenticated]);
+  useEffect(() => {
+    if (!authenticated) {
+      if (sessionStorage.getItem('authenticated')) {
+        setAuthenticated(true);
+      }
+    }
+  }, [authenticated]);
 
-	const unlock = () => {
-		setAuthenticated(true);
-	}
+  const unlock = () => {
+    setAuthenticated(true);
+  }
 
-	return (
-		<ApplicationProvider>
-			<BrowserRouter basename="/">
-			{ authenticated ?
-				<Fragment>
-					<Header />
-					<div id="container">
-						<Routes>
-							<Route path="/" element={<Home />} />
-							<Route path="/*" element={<Home />} />
-						</Routes>
-					</div>
-				</Fragment>
-			:
-				<Passcode onUnlock={unlock} />
-			}
-			</BrowserRouter>
-		</ApplicationProvider>
-	)
+  return (
+    <ApplicationProvider>
+      <BrowserRouter basename="/">
+      { authenticated ?
+        <Fragment>
+          <Header />
+          <div id="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/*" element={<Home />} />
+            </Routes>
+          </div>
+        </Fragment>
+      :
+        <Passcode onUnlock={unlock} />
+      }
+      </BrowserRouter>
+    </ApplicationProvider>
+  )
 }

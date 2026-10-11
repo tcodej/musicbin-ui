@@ -286,6 +286,7 @@ audio {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 20;
 
   .panel {
     color: $d-gray;
@@ -328,12 +329,11 @@ audio {
     border-radius: 50%;
     font-size: 24px;
 
-    &:hover {
+    &:hover, &.active {
       background-color: rgba(255, 255, 255, 0.4);
     }
   }
 }
-
 
 
 /* ----- HOME BROWSE VIEW ----- */
